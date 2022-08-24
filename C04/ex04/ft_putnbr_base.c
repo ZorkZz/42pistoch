@@ -6,7 +6,7 @@
 /*   By: astachni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 09:28:18 by astachni          #+#    #+#             */
-/*   Updated: 2022/08/16 11:14:16 by astachni         ###   ########lyon.fr   */
+/*   Updated: 2022/08/22 23:53:15 by astachni         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -40,14 +40,17 @@ unsigned int	base_converter(char *base)
 	return (i0);
 }
 
-void	ft_recursive(unsigned int nbr, char *base, unsigned int size)
+void	ft_recursive(unsigned int nbr, char *base, unsigned int base_nbr)
 {
-	if (nbr > size - 1)
+	if (nbr >= 0 && nbr < base_nbr)
 	{
-		ft_recursive(nbr_u / base_nbr, base);
-		ft_putchar(base[nbr_u % base_nbr]);
+		ft_putchar(base[nbr]);
 	}
-
+	else
+	{
+		ft_recursive(nbr / base_nbr, base, base_nbr);
+		ft_putchar(base[nbr % base_nbr]);
+	}
 }
 
 void	ft_putnbr_base(int nbr, char *base)
@@ -67,15 +70,5 @@ void	ft_putnbr_base(int nbr, char *base)
 	}
 	else
 		nbr_u = nbr;
-	if (nbr > 0)
-	{
-		ft_recursive(nbr_u / base_nbr, base);
-	}
-	else
-		ft_putchar(base[nbr_u]);
-}
-
-int	main(void)
-{
-
+	ft_recursive(nbr_u, base, base_nbr);
 }

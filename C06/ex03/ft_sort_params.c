@@ -6,7 +6,7 @@
 /*   By: astachni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 16:14:43 by astachni          #+#    #+#             */
-/*   Updated: 2022/08/16 20:25:51 by astachni         ###   ########lyon.fr   */
+/*   Updated: 2022/08/17 15:39:14 by astachni         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -30,7 +30,6 @@ int	ft_compare(char *a, char *b)
 
 void	ft_sort_table(char **tab, int size)
 {
-	int		a;
 	int		b;
 	char	*temp;
 

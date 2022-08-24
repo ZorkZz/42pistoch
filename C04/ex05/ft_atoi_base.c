@@ -6,48 +6,66 @@
 /*   By: astachni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 15:03:44 by astachni          #+#    #+#             */
-/*   Updated: 2022/08/11 16:51:53 by astachni         ###   ########lyon.fr   */
+/*   Updated: 2022/08/22 23:41:48 by astachni         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
+#include <unistd.h>
 
-int	count_m(char c, int nb_neg)
+int	ft_atoi(char *str, char base_len)
 {
-	if (c == '-')
-		nb_neg ++;
-	if (c == '\t' || c == '\n' || c == '\v' || \
-		c == '\t' || c == '\t' || c == ' ')
-		return (0);
-	return (nb_neg);
+	int	neg;
+	int	nb;
+	int	i;
+
+	neg = 1;
+	nb = 1;
+	i = 0;
+	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\v' || \
+			str[i] == '\r' || str[i] == '\f' || str[i] == ' ')
+		i++;
+	while (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			neg *= -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		nb = nb * base_len + str[i] - 48 - 1;
+		i++;
+	}
+	return (nb * neg);
 }
 
-int	add_nb(char A, char B, int nb)
+unsigned int	base_conv(char *base)
 {
-	if (B == '-' || B == '+')
-		return (A - 48);
-	else
-		return ((nb * 10) + A - 48);
+	unsigned int	i;
+	unsigned int	j;
+
+	i = 0;
+	while (base[i] != '\0')
+	{
+		j = i + 1;
+		while (base[j] != '\0')
+		{
+			if (base[i] == '+' || base[j] == '-' || (base [i] >= 9 && \
+				base[i] <= 13) || base [i] == ' ')
+				return (0);
+			if (base[i] == base [j])
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (i);
 }
 
 int	ft_atoi_base(char *str, char *base)
 {
-	int	var[4];
+	int	atoi_result;
+	int	len_base;
 
-	var[0] = 0;
-	var[1] = 0;
-	while (str[var[0]])
-	{
-		var[1] = count_m(str[var[0]], var[1]);
-		if (var [1] == 0)
-			return (0);
-		var[2] = var[0];
-		while (str[var[2]] >= 48 && str[var[2] <= 57])
-		{
-			var[3] = add_nb(str[var[2]], str[var[2] - 1], var[3]);
-			var[0] = var[2];
-			if (!(str[var[2]] >= 48 && str[var[2]] <= 57))
-				return (0);
-		}
-		var[0]++;
-	}
-	return (0);
+	len_base = base_conv(base);
+	atoi_result = ft_atoi(str, len_base);
+	return (atoi_result);
 }

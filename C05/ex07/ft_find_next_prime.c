@@ -6,7 +6,7 @@
 /*   By: astachni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 21:34:05 by astachni          #+#    #+#             */
-/*   Updated: 2022/08/16 20:30:00 by astachni         ###   ########lyon.fr   */
+/*   Updated: 2022/08/24 00:15:36 by astachni         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 int	ft_is_prime(int nb)
@@ -35,6 +35,13 @@ int	ft_is_prime(int nb)
 int	ft_find_next_prime(int nb)
 {
 	while (!ft_is_prime(nb))
-		nb++;
+	{
+		if (nb == 2)
+			return (nb);
+		if (nb % 2 == 0)
+			nb++;
+		else
+			nb += 2;
+	}
 	return (nb);
 }
